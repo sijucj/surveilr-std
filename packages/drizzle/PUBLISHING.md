@@ -1,6 +1,7 @@
-# Publishing Guide for @surveilr/bootstrap-sql
+# Publishing Guide for @surveilr/ontology
 
-This guide covers the process for publishing the `@surveilr/bootstrap-sql` package to npm.
+This guide covers the process for publishing the `@surveilr/ontology` package to
+npm.
 
 ---
 
@@ -9,23 +10,27 @@ This guide covers the process for publishing the `@surveilr/bootstrap-sql` packa
 Before publishing a new version, ensure the following:
 
 ### 1. **Code Quality**
+
 - [ ] All TypeScript files compile without errors
 - [ ] Run `npm run lint` and fix any issues
 - [ ] All tests pass (if applicable)
 - [ ] Code follows project conventions
 
 ### 2. **Documentation**
+
 - [ ] README.md is up to date
 - [ ] CHANGELOG.md includes new version notes
 - [ ] All exported APIs are documented
 - [ ] Examples are tested and working
 
 ### 3. **Dependencies**
+
 - [ ] All dependencies are up to date
 - [ ] Peer dependencies are correctly specified
 - [ ] No unnecessary dependencies included
 
 ### 4. **Build Verification**
+
 ```bash
 # Clean and rebuild
 npm run build
@@ -40,6 +45,7 @@ ls -la dist/
 ```
 
 ### 5. **Package Contents**
+
 ```bash
 # Preview what will be published
 npm pack --dry-run
@@ -106,7 +112,7 @@ npm run lint
 npm pack
 
 # In another project, test the package
-npm install /path/to/surveilr-bootstrap-sql-0.0.3.tgz
+npm install /path/to/surveilr-ontology-0.0.2.tgz
 ```
 
 ### Step 4: Publish to npm
@@ -122,10 +128,10 @@ npm publish --access public
 
 ```bash
 # Check on npm
-npm view @surveilr/bootstrap-sql
+npm view @surveilr/ontology
 
 # Install in a test project
-npm install @surveilr/bootstrap-sql
+npm install @surveilr/ontology
 ```
 
 ### Step 6: Tag the Release in Git
@@ -154,27 +160,27 @@ name: Publish Package
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          registry-url: 'https://registry.npmjs.org'
-      
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+
       - name: Install dependencies
         working-directory: packages/drizzle
         run: npm ci
-      
+
       - name: Build
         working-directory: packages/drizzle
         run: npm run build
-      
+
       - name: Publish to npm
         working-directory: packages/drizzle
         run: npm publish --access public
@@ -184,8 +190,10 @@ jobs:
 
 ### Setup NPM_TOKEN Secret
 
-1. Generate an npm access token at https://www.npmjs.com/settings/YOUR_USERNAME/tokens
-2. Add it as a secret in GitHub: Settings → Secrets → Actions → New repository secret
+1. Generate an npm access token at
+   https://www.npmjs.com/settings/YOUR_USERNAME/tokens
+2. Add it as a secret in GitHub: Settings → Secrets → Actions → New repository
+   secret
 3. Name it `NPM_TOKEN`
 
 ---
@@ -220,20 +228,24 @@ After successfully publishing:
 ### Common Issues
 
 **Error: "You do not have permission to publish"**
+
 - Ensure you're logged in: `npm whoami`
 - Verify you have publish rights to @surveilr scope
 - Use `--access public` for scoped packages
 
 **Error: "Version already exists"**
+
 - Update version in package.json
 - Run `npm version patch/minor/major`
 
 **Build Errors**
+
 - Clean node_modules: `rm -rf node_modules && npm install`
 - Clear dist: `rm -rf dist && npm run build`
 - Check TypeScript version compatibility
 
 **Missing Files in Published Package**
+
 - Check `files` field in package.json
 - Use `npm pack --dry-run` to preview
 
@@ -242,6 +254,6 @@ After successfully publishing:
 ## 📞 Support
 
 For questions or issues:
+
 - GitHub Issues: https://github.com/surveilr/std/issues
 - Repository: https://github.com/surveilr/std
-

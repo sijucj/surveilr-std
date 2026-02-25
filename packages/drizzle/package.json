@@ -11,16 +11,6 @@
             "types": "./dist/index.d.ts",
             "import": "./dist/index.js",
             "require": "./dist/index.cjs"
-        },
-        "./models": {
-            "types": "./dist/models.d.ts",
-            "import": "./dist/models.js",
-            "require": "./dist/models.cjs"
-        },
-        "./views": {
-            "types": "./dist/views.d.ts",
-            "import": "./dist/views.js",
-            "require": "./dist/views.cjs"
         }
     },
     "files": [
@@ -28,8 +18,8 @@
         "README.md"
     ],
     "scripts": {
-        "build": "tsup models.ts views.ts index.ts --format cjs,esm --dts --clean",
-        "dev": "tsup models.ts views.ts index.ts --format cjs,esm --dts --watch",
+        "build": "tsup index.ts --format cjs,esm --dts --clean",
+        "dev": "tsup index.ts --format cjs,esm --dts --watch",
         "lint": "tsc --noEmit"
     },
     "keywords": [
